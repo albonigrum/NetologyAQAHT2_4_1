@@ -1,0 +1,1 @@
+AppVeyor build status: &nbsp;&nbsp;&nbsp;&nbsp;[![Build status](https://ci.appveyor.com/api/projects/status/un891uu606wlrv5m?svg=true)](https://ci.appveyor.com/project/albonigrum/netologyaqaht2-4-1)
