@@ -21,11 +21,6 @@ dependencies {
     testRuntimeOnly 'org.slf4j:slf4j-simple:1.7.30'
 }
 
-tasks.withType(JavaCompile) {
-    options.compilerArgs << '-Xlint:unchecked'
-    options.deprecation = true
-}
-
 test {
     useJUnitPlatform()
     // в тестах, вызывая `gradlew test -Dselenide.headless=true` будем передавать этот параметр в JVM (где его подтянет Selenide)
