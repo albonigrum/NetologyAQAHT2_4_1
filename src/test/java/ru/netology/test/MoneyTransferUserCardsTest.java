@@ -1,15 +1,15 @@
-package ru.netology;
+package ru.netology.test;
 
 import lombok.val;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import ru.netology.Page.LoginPage;
+import ru.netology.page.LoginPage;
 
 import static com.codeborne.selenide.Selenide.open;
 import static org.junit.jupiter.api.Assertions.*;
-import static ru.netology.Data.DataHelper.*;
+import static ru.netology.data.DataHelper.*;
 
 public class MoneyTransferUserCardsTest {
     @BeforeEach
@@ -35,8 +35,8 @@ public class MoneyTransferUserCardsTest {
 
             val BeforeDepositCardsPage =
                     new LoginPage()
-                    .loginWithHardcodedUser()
-                    .verifyWithHardcodedCode();
+                    .loginWithUser(getHardcodedUser())
+                    .verifyCode(getHardcodedVerifyCode());
 
             int[] beforeDepositAmount = {
                     BeforeDepositCardsPage.getBalanceOfCard(indexCardFrom),
@@ -46,7 +46,7 @@ public class MoneyTransferUserCardsTest {
             val AfterDepositCardsPage =
                     BeforeDepositCardsPage
                     .clickDeposit(indexCardTo)
-                    .deposit(HardcodedCards[indexCardFrom], amount);
+                    .deposit(getHardcodedCards()[indexCardFrom], amount);
             assertEquals(beforeDepositAmount[0] - amount, AfterDepositCardsPage.getBalanceOfCard(indexCardFrom));
             assertEquals(beforeDepositAmount[1] + amount, AfterDepositCardsPage.getBalanceOfCard(indexCardTo));
         }
@@ -67,8 +67,8 @@ public class MoneyTransferUserCardsTest {
 
             val BeforeDepositCardsPage =
                     new LoginPage()
-                            .loginWithHardcodedUser()
-                            .verifyWithHardcodedCode();
+                            .loginWithUser(getHardcodedUser())
+                            .verifyCode(getHardcodedVerifyCode());
 
             int[] beforeDepositAmount = {
                     BeforeDepositCardsPage.getBalanceOfCard(indexCardFrom),
@@ -78,7 +78,7 @@ public class MoneyTransferUserCardsTest {
             val AfterDepositCardsPage =
                     BeforeDepositCardsPage
                             .clickDeposit(indexCardTo)
-                            .deposit(HardcodedCards[indexCardFrom], amount);
+                            .deposit(getHardcodedCards()[indexCardFrom], amount);
             // Должна быть ошибка, значения балансов должны не изменяться
             assertEquals(beforeDepositAmount[0], AfterDepositCardsPage.getBalanceOfCard(indexCardFrom));
             assertEquals(beforeDepositAmount[1], AfterDepositCardsPage.getBalanceOfCard(indexCardTo));

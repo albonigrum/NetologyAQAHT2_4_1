@@ -1,7 +1,6 @@
-package ru.netology.Page;
+package ru.netology.page;
 
 import com.codeborne.selenide.SelenideElement;
-import ru.netology.Data.DataHelper;
 
 import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Condition.visible;
@@ -16,8 +15,8 @@ public class VerificationPage {
         verifyButton.shouldBe(visible).shouldBe(enabled);
     }
 
-    public CardsPage verifyWithHardcodedCode() {
-        codeInput.sendKeys(DataHelper.HardcodedVerifyCode);
+    public CardsPage verifyCode(String verificationCode) {
+        codeInput.sendKeys(verificationCode);
         verifyButton.click();
         return new CardsPage();
     }

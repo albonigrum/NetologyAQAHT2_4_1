@@ -1,4 +1,4 @@
-package ru.netology.Data;
+package ru.netology.data;
 
 import lombok.Value;
 import org.yaml.snakeyaml.Yaml;
@@ -13,9 +13,9 @@ import java.util.Map;
 public class DataHelper {
     private DataHelper() {}
     private static final Path HARDCODED_DATA_DOCUMENT_PATH = Paths.get("src/test/resources/hardcoded_user.yml");
-    public static final AuthorizationInfo HardcodedUser;
-    public static final String HardcodedVerifyCode;
-    public static final String[] HardcodedCards;
+    private static final AuthorizationInfo HardcodedUser;
+    private static final String HardcodedVerifyCode;
+    private static final String[] HardcodedCards;
 
     static {
         InputStream in = null;
@@ -36,6 +36,18 @@ public class DataHelper {
         String firstCard = (String) mapL3.get("cards").get("first").get("number");
         String secondCard = (String) mapL3.get("cards").get("second").get("number");
         HardcodedCards = new String[]{firstCard, secondCard};
+    }
+
+    public static AuthorizationInfo getHardcodedUser() {
+        return HardcodedUser;
+    }
+
+    public static String getHardcodedVerifyCode() {
+        return HardcodedVerifyCode;
+    }
+
+    public static String[] getHardcodedCards() {
+        return HardcodedCards;
     }
 
     @Value
