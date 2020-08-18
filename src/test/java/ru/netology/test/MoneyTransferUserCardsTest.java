@@ -33,26 +33,25 @@ public class MoneyTransferUserCardsTest {
             int indexCardTo = Integer.parseInt(sIndexCardTo);
             int amount = Integer.parseInt(sAmount);
 
-            val BeforeDepositCardsPage =
+            val beforeDepositCardsPage =
                     new LoginPage()
                     .loginWithUser(getHardcodedUser())
                     .verifyCode(getHardcodedVerifyCode());
 
             int[] beforeDepositAmount = {
-                    BeforeDepositCardsPage.getBalanceOfCard(indexCardFrom),
-                    BeforeDepositCardsPage.getBalanceOfCard(indexCardTo)
+                    beforeDepositCardsPage.getBalanceOfCard(indexCardFrom),
+                    beforeDepositCardsPage.getBalanceOfCard(indexCardTo)
             };
 
-            val AfterDepositCardsPage =
-                    BeforeDepositCardsPage
+            val afterDepositCardsPage =
+                    beforeDepositCardsPage
                     .clickDeposit(indexCardTo)
                     .deposit(getHardcodedCards()[indexCardFrom], amount);
-            assertEquals(beforeDepositAmount[0] - amount, AfterDepositCardsPage.getBalanceOfCard(indexCardFrom));
-            assertEquals(beforeDepositAmount[1] + amount, AfterDepositCardsPage.getBalanceOfCard(indexCardTo));
+            assertEquals(beforeDepositAmount[0] - amount, afterDepositCardsPage.getBalanceOfCard(indexCardFrom));
+            assertEquals(beforeDepositAmount[1] + amount, afterDepositCardsPage.getBalanceOfCard(indexCardTo));
         }
     }
 
-    /*
     @Nested
     class SadPathTests {
         @ParameterizedTest
@@ -65,24 +64,23 @@ public class MoneyTransferUserCardsTest {
             int indexCardTo = Integer.parseInt(sIndexCardTo);
             int amount = Integer.parseInt(sAmount);
 
-            val BeforeDepositCardsPage =
+            val beforeDepositCardsPage =
                     new LoginPage()
                             .loginWithUser(getHardcodedUser())
                             .verifyCode(getHardcodedVerifyCode());
 
             int[] beforeDepositAmount = {
-                    BeforeDepositCardsPage.getBalanceOfCard(indexCardFrom),
-                    BeforeDepositCardsPage.getBalanceOfCard(indexCardTo)
+                    beforeDepositCardsPage.getBalanceOfCard(indexCardFrom),
+                    beforeDepositCardsPage.getBalanceOfCard(indexCardTo)
             };
 
-            val AfterDepositCardsPage =
-                    BeforeDepositCardsPage
+            val afterDepositCardsPage =
+                    beforeDepositCardsPage
                             .clickDeposit(indexCardTo)
                             .deposit(getHardcodedCards()[indexCardFrom], amount);
-            // Должна быть ошибка, значения балансов должны не изменяться
-            assertEquals(beforeDepositAmount[0], AfterDepositCardsPage.getBalanceOfCard(indexCardFrom));
-            assertEquals(beforeDepositAmount[1], AfterDepositCardsPage.getBalanceOfCard(indexCardTo));
+            // Ошибки не должно быть, значения балансов не должны изменяться
+            assertEquals(beforeDepositAmount[0], afterDepositCardsPage.getBalanceOfCard(indexCardFrom));
+            assertEquals(beforeDepositAmount[1], afterDepositCardsPage.getBalanceOfCard(indexCardTo));
         }
     }
-    */
 }
